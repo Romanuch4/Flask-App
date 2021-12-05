@@ -1,0 +1,62 @@
+<html>
+
+<head>
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .table {
+      width: 80%;
+      background-color: blue;
+      border-radius: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .table__item {
+      flex-basis: 25%;
+      max-width: 256px;
+      background-color: yellow;
+      padding: 5px 8px;
+      margin: 2px;
+      font-size: 18px;
+      font-family: Roboto, sans-serif;
+    }
+  </style>
+  <title>Browse entries</title>
+</head>
+
+<body>
+  <script>
+    const REQUEST_URL = '/browse/entries';
+    const getData = async () => {
+      const result = await fetch(REQUEST_URL).then((res) => res.json())
+      const entries = result.entries;
+      let content = ``;
+      for (let i = 0; i < entries.length; i++) {
+        console.log(entries);
+        content += `
+          <div class="table__item">${entries[i][0]}</div>
+          <div class="table__item">${entries[i][1]}</div>
+          <div class="table__item">${entries[i][2]}</div>
+          <div class="table__item">${entries[i][3]}</div>
+        `
+      }
+      document.body.innerHTML = `
+        <div class="table">
+          ${content}
+        </div>
+      `;
+    }
+
+    getData();
+  </script>
+</body>
+
+</html>
