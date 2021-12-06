@@ -1,5 +1,6 @@
 import datetime
-import random
+from random import choice
+from string import ascii_uppercase
 
 from flask import Flask, render_template
 
@@ -27,8 +28,8 @@ def get_time():
 
 @app.route("/random")
 def pick_number():
-    n = int(random.uniform(1, 10))
-    return render_template("random.html", number=n)
+    str = ''.join(choice(ascii_uppercase) for i in range(12))
+    return render_template("random.html", str=str)
 
 
 @app.route('/')
